@@ -9,6 +9,7 @@ const shopRoutes = require('./routes/shop');
 
 // Middlewares and Routes
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // imported router object with routes registered from routes/admin.js
 // order matters, if this was after '/' route middleware, we'd never
