@@ -4,8 +4,12 @@ const express = require('express');
 
 const app = express();
 
-// Importing routers for route handling
-const adminRoutes = require('./routes/admin');
+// setting templating engine and views folder
+app.set('view engine', 'ejs');
+app.set('views', 'views');
+
+// Importing routers
+const adminData = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
 
 // App Level Middleware
@@ -17,12 +21,12 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Handling routes
-app.use('/admin', adminRoutes);
+app.use('/admin', adminData.router);
 app.use(shopRoutes);
 
 // For unhandled routes (404)
 app.use((req, res, next) => {
-  res.status(404).sendFile(path.join(__dirname, 'views', '404.html'));
+  res.status(404).render('404', { pageTitle: 'Page Not Found' });
 });
 
 // Starting the server
