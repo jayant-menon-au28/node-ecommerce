@@ -9,7 +9,7 @@ app.set('view engine', 'ejs');
 app.set('views', 'views');
 
 // Importing routers
-const adminData = require('./routes/admin');
+const adminRoutes = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
 
 // App Level Middleware
@@ -21,7 +21,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Handling routes
-app.use('/admin', adminData.router);
+app.use('/admin', adminRoutes);
 app.use(shopRoutes);
 
 // For unhandled routes (404)
